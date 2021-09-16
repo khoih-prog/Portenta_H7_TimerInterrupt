@@ -31,10 +31,8 @@
 #ifndef ISR_TIMER_GENERIC_H
 #define ISR_TIMER_GENERIC_H
 
-#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
-       defined(STM32L0) || defined(STM32L1) || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
-       defined(STM32WB) || defined(STM32MP1) || defined(STM32L5))
-  //#error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
+#if !( ( defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) ) && defined(ARDUINO_ARCH_MBED) )
+  #error This code is intended to run on the MBED ARDUINO_PORTENTA_H7 platform! Please check your Tools->Board setting.
 #endif
 
 #ifndef PORTENTA_H7_TIMER_INTERRUPT_VERSION
