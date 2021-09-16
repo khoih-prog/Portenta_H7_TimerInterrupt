@@ -347,7 +347,7 @@ void setup()
     Serial.println(F("Can't set ITimer correctly. Select another freq. or interval"));
 
   // Just to demonstrate, don't use too many ISR Timers if not absolutely necessary
-  // You can use up to 16 timer for each STM32_ISR_Timer
+  // You can use up to 16 timer for each Portenta_H7_ISR_Timer
   for (uint16_t i = 0; i < NUMBER_ISR_TIMERS; i++)
   {
 #if USE_COMPLEX_STRUCT
