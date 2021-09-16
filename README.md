@@ -26,7 +26,7 @@
 * [HOWTO Fix `Multiple Definitions` Linker Error](#howto-fix-multiple-definitions-linker-error)
 * [More useful Information about STM32 Timers](#more-useful-information-about-stm32-timers)
 * [Available Timers for Portenta_H7](#available-timers-for-portenta_h7)
-* [New from v1.0.0](#new-from-v100)
+* [From v1.2.1](#from-v121)
 * [Usage](#usage)
   * [1. Using only Hardware Timer directly](#1-using-only-hardware-timer-directly)
     * [1.1 Init Hardware Timer](#11-init-hardware-timer)
@@ -48,7 +48,7 @@
   * [2. TimerInterruptTest on PORTENTA_H7_M7](#2-timerinterrupttest-on-portenta_h7_m7)
   * [3. Argument_None on PORTENTA_H7_M7](#3-argument_none-on-portenta_h7_m7)
   * [4. Change_Interval on PORTENTA_H7_M7](#4-change_interval-on-portenta_h7_m7)
-  * [5. ISR_16_Timers_Array on PORTENTA_H7_M7](#5-isr_16_timers_array_complex-on-portenta_h7_m7)
+  * [5. ISR_16_Timers_Array on PORTENTA_H7_M7](#5-isr_16_timers_array-on-portenta_h7_m7)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
@@ -364,7 +364,7 @@ This is the temporary list for Portenta_H7 Timers which can be used. The availab
 ---
 ---
 
-## New from v1.0.0
+## From v1.2.1
 
 Now with these new `16 ISR-based timers` (while consuming only **1 hardware timer**), the maximum interval is practically unlimited (limited only by unsigned long miliseconds). 
 
