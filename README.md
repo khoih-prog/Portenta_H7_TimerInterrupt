@@ -81,7 +81,7 @@ The most important feature is they're ISR-based timers. Therefore, their executi
 
 The [**ISR_16_Timers_Array_Complex**](examples/ISR_16_Timers_Array_Complex) example will demonstrate the nearly perfect accuracy compared to software timers by printing the actual elapsed millisecs of each type of timers.
 
-The [PWM_Multi_Args](examples/PWM/PWM_Multi_Args) will demonstrate the usage of multichannel PWM using multiple Hardware Timers. The 6 independent Hardware Timers are used **to control 6 different PWM outputs**, with totally independent frequencies and dutycycles.
+The [**PWM_Multi_Args**](examples/PWM/PWM_Multi_Args) will demonstrate the usage of multichannel PWM using multiple Hardware Timers. The 6 independent Hardware Timers are used **to control 6 different PWM outputs**, with totally independent frequencies and dutycycles.
 
 Being ISR-based timers, their executions are not blocked by bad-behaving functions / tasks, such as connecting to WiFi, Internet or Blynk services. You can also have many `(up to 16)` timers to use.
 
