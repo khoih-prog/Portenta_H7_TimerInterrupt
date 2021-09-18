@@ -19,11 +19,12 @@
   Based on BlynkTimer.h
   Author: Volodymyr Shymanskyy
 
-  Version: 1.2.1
+  Version: 1.3.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7.
+  1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7
+  1.3.0   K.Hoang      17/09/2021 Add PWM features and examples
 *****************************************************************************************************************************/
 
 #pragma once
@@ -31,15 +32,35 @@
 #ifndef PORTENTA_H7_TIMERINTERRUPT_H
 #define PORTENTA_H7_TIMERINTERRUPT_H
 
-#if !( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
-       defined(STM32L0) || defined(STM32L1) || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
-       defined(STM32WB) || defined(STM32MP1) || defined(STM32L5))
-  //#error This code is designed to run on STM32F/L/H/G/WB/MP1 platform! Please check your Tools->Board setting.
+#if ( ( defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) ) && defined(ARDUINO_ARCH_MBED) )
+  #warning Use MBED ARDUINO_PORTENTA_H7 and LittleFS
+  
+  #if defined(BOARD_NAME)
+    #undef BOARD_NAME
+  #endif
+
+  #if defined(CORE_CM7)
+    #warning Using Portenta H7 M7 core
+    #define BOARD_NAME              "PORTENTA_H7_M7"
+  #else
+    #warning Using Portenta H7 M4 core
+    #define BOARD_NAME              "PORTENTA_H7_M4"
+  #endif
+  
+#else
+  #error This code is intended to run on the MBED ARDUINO_PORTENTA_H7 platform! Please check your Tools->Board setting. 
 #endif
 
 #ifndef PORTENTA_H7_TIMER_INTERRUPT_VERSION
-  #define PORTENTA_H7_TIMER_INTERRUPT_VERSION       "Portenta_H7_TimerInterrupt v1.2.1"
+  #define PORTENTA_H7_TIMER_INTERRUPT_VERSION       "Portenta_H7_TimerInterrupt v1.3.0"
 #endif
+
+
+///////////////////////////////////////////
+
+#include "stm32/HardwareTimer.h"
+
+///////////////////////////////////////////
 
 #include "TimerInterrupt_Generic_Debug.h"
 
@@ -91,7 +112,9 @@ class Portenta_H7_TimerInterrupt
 
 
       _hwTimer->setCount(0, MICROSEC_FORMAT);
+      
       _hwTimer->setOverflow(_timerCount, MICROSEC_FORMAT);
+      //////
 
       _hwTimer->attachInterrupt(callback);
       _hwTimer->resume();

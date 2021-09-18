@@ -35,13 +35,17 @@
     * [2.1 Init Hardware Timer and ISR-based Timer](#21-init-hardware-timer-and-isr-based-timer)
     * [2.2 Set Hardware Timer Interval and attach Timer Interrupt Handler functions](#22-set-hardware-timer-interval-and-attach-timer-interrupt-handler-functions)
 * [Examples](#examples)
-  * [  1. Argument_None](examples/Argument_None)
-  * [  2. **Change_Interval**](examples/Change_Interval)
-  * [  3. ISR_16_Timers_Array](examples/ISR_16_Timers_Array)
-  * [  4. **ISR_16_Timers_Array_Complex**](examples/ISR_16_Timers_Array_Complex)
-  * [  5. SwitchDebounce](examples/SwitchDebounce)
-  * [  6. TimerInterruptLEDDemo](examples/TimerInterruptLEDDemo)
-  * [  7. TimerInterruptTest](examples/TimerInterruptTest)
+  * [1. TimerInterrupt](#1-TimerInterrupt)
+    * [ 1. Argument_None](examples/Argument_None)
+    * [ 2. **Change_Interval**](examples/Change_Interval)
+    * [ 3. ISR_16_Timers_Array](examples/ISR_16_Timers_Array)
+    * [ 4. **ISR_16_Timers_Array_Complex**](examples/ISR_16_Timers_Array_Complex)
+    * [ 5. SwitchDebounce](examples/SwitchDebounce)
+    * [ 6. TimerInterruptLEDDemo](examples/TimerInterruptLEDDemo)
+    * [ 7. TimerInterruptTest](examples/TimerInterruptTest)
+   [2. Multichannel PWM](#2-Multichannel-PWM) 
+    * [ 8. PWM_Multi](examples/PWM/PWM_Multi)
+    * [ 9. PWM_Multi_Args](examples/PWM/PWM_Multi_Args)
 * [Example ISR_16_Timers_Array_Complex](#example-isr_16_timers_array_complex)
 * [Debug Terminal Output Samples](#debug-terminal-output-samples)
   * [1. ISR_16_Timers_Array_Complex on PORTENTA_H7_M7](#1-isr_16_timers_array_complex-on-portenta_h7_m7)
@@ -49,6 +53,7 @@
   * [3. Argument_None on PORTENTA_H7_M7](#3-argument_none-on-portenta_h7_m7)
   * [4. Change_Interval on PORTENTA_H7_M7](#4-change_interval-on-portenta_h7_m7)
   * [5. ISR_16_Timers_Array on PORTENTA_H7_M7](#5-isr_16_timers_array-on-portenta_h7_m7)
+  * [6. PWM_Multi_Args on PORTENTA_H7_M7](#6-PWM_Multi_Args-on-portenta_h7_m7)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
@@ -74,7 +79,9 @@ Now with these new **16 ISR-based timers**, the maximum interval is **practicall
 
 The most important feature is they're ISR-based timers. Therefore, their executions are **not blocked by bad-behaving functions / tasks**. This important feature is absolutely necessary for mission-critical tasks. 
 
-The [**ISR_Timer_Complex**](examples/ISR_Timer_Complex) example will demonstrate the nearly perfect accuracy compared to software timers by printing the actual elapsed millisecs of each type of timers.
+The [**ISR_16_Timers_Array_Complex**](examples/ISR_16_Timers_Array_Complex) example will demonstrate the nearly perfect accuracy compared to software timers by printing the actual elapsed millisecs of each type of timers.
+
+The [PWM_Multi_Args](examples/PWM/PWM_Multi_Args) will demonstrate the usage of multichannel PWM using multiple Hardware Timers. The 6 independent Hardware Timers are used **to control 6 different PWM outputs**, with totally independent frequencies and dutycycles.
 
 Being ISR-based timers, their executions are not blocked by bad-behaving functions / tasks, such as connecting to WiFi, Internet or Blynk services. You can also have many `(up to 16)` timers to use.
 
@@ -371,7 +378,7 @@ Now with these new `16 ISR-based timers` (while consuming only **1 hardware time
 The accuracy is nearly perfect compared to software timers. The most important feature is they're ISR-based timers Therefore, their executions are not blocked by bad-behaving functions / tasks.
 This important feature is absolutely necessary for mission-critical tasks. 
 
-The `ISR_Timer_Complex` example will demonstrate the nearly perfect accuracy compared to software timers by printing the actual elapsed millisecs of each type of timers.
+The `ISR_16_Timers_Array_Complex` example will demonstrate the nearly perfect accuracy compared to software timers by printing the actual elapsed millisecs of each type of timers.
 Being ISR-based timers, their executions are not blocked by bad-behaving functions / tasks, such as connecting to WiFi, Internet and Blynk services. You can also have many `(up to 16)` timers to use.
 This non-being-blocked important feature is absolutely necessary for mission-critical tasks. 
 You'll see software-based SimpleTimer is blocked while system is connecting to WiFi / Internet / Blynk, as well as by blocking task 
@@ -498,6 +505,8 @@ void setup()
 
 ### Examples: 
 
+#### 1. TimerInterrupt
+
  1. [Argument_None](examples/Argument_None)
  2. [**Change_Interval**](examples/Change_Interval).
  3. [ISR_16_Timers_Array](examples/ISR_16_Timers_Array)
@@ -505,6 +514,11 @@ void setup()
  5. [SwitchDebounce](examples/SwitchDebounce)
  6. [TimerInterruptLEDDemo](examples/TimerInterruptLEDDemo)
  7. [TimerInterruptTest](examples/TimerInterruptTest)
+
+#### 2. Multichannel PWM
+ 
+ 8. [PWM_Multi](examples/PWM/PWM_Multi)
+ 9. [PWM_Multi_Args](examples/PWM/PWM_Multi_Args)
  
 ---
 ---
@@ -861,7 +875,7 @@ In this example, 16 independent ISR Timers are used, yet utilized just one Hardw
 
 ```
 Starting ISR_16_Timers_Array_Complex on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.2.1
+Portenta_H7_TimerInterrupt v1.3.0
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
 [TISR] Frequency = 1000000.00 , _count = 10000
 Starting ITimer OK, millis() = 1111
@@ -1011,7 +1025,7 @@ The following is the sample terminal output when running example [**TimerInterru
 
 ```
 Starting TimerInterruptTest on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.2.1
+Portenta_H7_TimerInterrupt v1.3.0
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
 [TISR] Frequency = 1000000.00 , _count = 1000000
 Starting ITimer0 OK, millis() = 1410
@@ -1037,7 +1051,7 @@ The following is the sample terminal output when running example [**Argument_Non
 
 ```
 Starting Argument_None on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.2.1
+Portenta_H7_TimerInterrupt v1.3.0
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 100000000
 [TISR] Frequency = 1000000.00 , _count = 1000000
 Starting ITimer0 OK, millis() = 1009
@@ -1057,7 +1071,7 @@ The following is the sample terminal output when running example [Change_Interva
 
 ```
 Starting Change_Interval on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.2.1
+Portenta_H7_TimerInterrupt v1.3.0
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
 [TISR] Frequency = 1000000.00 , _count = 500000
 Starting  Timer0 OK, millis() = 1415
@@ -1097,7 +1111,7 @@ While software-based `SimpleTimer`, **programmed for 2s, is activated after 10.0
 
 ```
 Starting ISR_16_Timers_Array on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.2.1
+Portenta_H7_TimerInterrupt v1.3.0
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
 [TISR] Frequency = 1000000.00 , _count = 100
 Starting ITimer OK, millis() = 1109
@@ -1154,6 +1168,48 @@ Timer : 14, programmed : 15000, actual : 15000
 Timer : 15, programmed : 16000, actual : 16000
 ```
 
+---
+
+### 6. PWM_Multi_Args on PORTENTA_H7_M7
+
+The following is the sample terminal output when running new example [PWM_Multi_Args](examples/PWM/PWM_Multi_Args) on **Portenta_H7** to demonstrate the usage of multichannel PWM using multiple Hardware Timers. The 6 independent Hardware Timers are used **to control 6 different PWM outputs**, with totally independent frequencies and dutycycles.
+
+
+```
+Starting PWM_Multi_Args on PORTENTA_H7_M7
+Portenta_H7_TimerInterrupt v1.3.0
+Index = 0, Instance = 0x40010000, channel = 3, TimerIndex = 0
+Index = 1, Instance = 0x40000800, channel = 1, TimerIndex = 3
+Index = 2, Instance = 0x40001400, channel = 2, TimerIndex = 6
+Index = 3, Instance = 0x40010400, channel = 2, TimerIndex = 7
+Index = 4, Instance = 0x40001800, channel = 1, TimerIndex = 8
+Index = 5, Instance = 0x40001C00, channel = 3, TimerIndex = 9
+Index = 6, Instance = 0x40002000, channel = 1, TimerIndex = 10
+
+==========================================================================================================
+Count 0		Count 1		Count 2		Count 3		Count 4		Count 5		Count 6		
+==========================================================================================================
+10		    20		    50		    100		    199		    498		    995		
+20		    40		    100		    199		    398		    995		    1990		
+30		    60		    150		    299		    597		    1493		  2985		
+40		    80		    199		    398		    796		    1990		  3980		
+50		    100		    249		    498		    995		    2488		  4975		
+60		    120		    299		    597		    1194		  2985		  5970		
+70		    140		    349		    697		    1393		  3483		  6965		
+80		    160		    398		    796		    1592		  3980		  7960		
+90		    180		    448		    896		    1791		  4478		  8955		
+100		    199		    498		    995		    1990		  4975		  9950		
+110		    219		    548		    1095		  2189		  5473		  10945		
+120		    239		    597		    1194		  2388		  5970		  11940		
+130		    259		    647		    1294		  2587		  6468		  12935		
+140		    279		    697		    1393		  2786		  6965		  13930		
+150		    299		    747		    1493		  2985		  7463		  14925		
+160		    319		    796		    1592		  3184		  7960		  15920		
+170		    339		    846		    1692		  3383		  8458		  16915		
+180		    359		    896		    1791		  3582		  8955		  17910		
+190		    379		    946		    1891		  3781		  9453		  18905		
+199		    398		    995		    1990		  3980		  9950		  19900		
+```
 
 ---
 ---

@@ -20,11 +20,12 @@
   Based on BlynkTimer.h
   Author: Volodymyr Shymanskyy
 
-  Version: 1.2.1
+  Version: 1.3.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7.
+  1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7
+  1.3.0   K.Hoang      17/09/2021 Add PWM features and examples
  *****************************************************************************************************************************/
 
 // Modified from stm32 core v2.0.0

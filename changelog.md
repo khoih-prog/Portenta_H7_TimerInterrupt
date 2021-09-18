@@ -12,12 +12,17 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
-  * [Initial Releases v1.2.1](#initial-releases-v121)
+  * [Releases v1.3.0](#Releases-v130)
+  * [Initial Releases v1.2.1](#Initial-Releases-v121)
 
 ---
 ---
 
 ## Changelog
+
+### Releases v1.3.0
+
+1. Add PWM features and examples
 
 ### Initial Releases v1.2.1
 

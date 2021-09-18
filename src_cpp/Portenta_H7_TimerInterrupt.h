@@ -19,11 +19,12 @@
   Based on BlynkTimer.h
   Author: Volodymyr Shymanskyy
 
-  Version: 1.2.1
+  Version: 1.3.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7.
+  1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7
+  1.3.0   K.Hoang      17/09/2021 Add PWM features and examples
 *****************************************************************************************************************************/
 
 #pragma once
@@ -51,7 +52,7 @@
 #endif
 
 #ifndef PORTENTA_H7_TIMER_INTERRUPT_VERSION
-  #define PORTENTA_H7_TIMER_INTERRUPT_VERSION       "Portenta_H7_TimerInterrupt v1.2.1"
+  #define PORTENTA_H7_TIMER_INTERRUPT_VERSION       "Portenta_H7_TimerInterrupt v1.3.0"
 #endif
 
 
