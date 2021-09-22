@@ -875,7 +875,7 @@ In this example, 16 independent ISR Timers are used, yet utilized just one Hardw
 
 ```
 Starting ISR_16_Timers_Array_Complex on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.0
+Portenta_H7_TimerInterrupt v1.3.1
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
 [TISR] Frequency = 1000000.00 , _count = 10000
 Starting ITimer OK, millis() = 1111
@@ -1025,7 +1025,7 @@ The following is the sample terminal output when running example [**TimerInterru
 
 ```
 Starting TimerInterruptTest on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.0
+Portenta_H7_TimerInterrupt v1.3.1
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
 [TISR] Frequency = 1000000.00 , _count = 1000000
 Starting ITimer0 OK, millis() = 1410
@@ -1051,7 +1051,7 @@ The following is the sample terminal output when running example [**Argument_Non
 
 ```
 Starting Argument_None on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.0
+Portenta_H7_TimerInterrupt v1.3.1
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 100000000
 [TISR] Frequency = 1000000.00 , _count = 1000000
 Starting ITimer0 OK, millis() = 1009
@@ -1071,7 +1071,7 @@ The following is the sample terminal output when running example [Change_Interva
 
 ```
 Starting Change_Interval on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.0
+Portenta_H7_TimerInterrupt v1.3.1
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
 [TISR] Frequency = 1000000.00 , _count = 500000
 Starting  Timer0 OK, millis() = 1415
@@ -1111,7 +1111,7 @@ While software-based `SimpleTimer`, **programmed for 2s, is activated after 10.0
 
 ```
 Starting ISR_16_Timers_Array on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.0
+Portenta_H7_TimerInterrupt v1.3.1
 [TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
 [TISR] Frequency = 1000000.00 , _count = 100
 Starting ITimer OK, millis() = 1109
@@ -1177,7 +1177,7 @@ The following is the sample terminal output when running new example [PWM_Multi_
 
 ```
 Starting PWM_Multi_Args on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.0
+Portenta_H7_TimerInterrupt v1.3.1
 Index = 0, Instance = 0x40010000, channel = 3, TimerIndex = 0
 Index = 1, Instance = 0x40000800, channel = 1, TimerIndex = 3
 Index = 2, Instance = 0x40001400, channel = 2, TimerIndex = 6

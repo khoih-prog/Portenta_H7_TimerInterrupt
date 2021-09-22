@@ -19,12 +19,13 @@
   Based on BlynkTimer.h
   Author: Volodymyr Shymanskyy
 
-  Version: 1.3.0
+  Version: 1.3.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7
   1.3.0   K.Hoang      17/09/2021 Add PWM features and examples
+  1.3.1   K.Hoang      21/09/2021 Fix warnings in PWM examples
 *****************************************************************************************************************************/
 /*
    In cores/arduino/stm32/PeripheralPins.h => #define PinMap_PWM PinMap_TIM
@@ -170,7 +171,7 @@ TIM_TypeDef *TimerInstance[] = { TIM1, TIM4, TIM7, TIM8, TIM12, TIM13, TIM14 };
 
 volatile uint32_t callbackTime[] = { 0, 0, 0, 0, 0, 0, 0 };
 
-callback_function_t PeriodCallback0()
+void PeriodCallback0()
 {
   static bool ledON = LED_OFF;
 
@@ -181,7 +182,7 @@ callback_function_t PeriodCallback0()
   ledON = !ledON;
 }
 
-callback_function_t PeriodCallback1()
+void PeriodCallback1()
 {
   static bool ledON = LED_OFF;
 
@@ -192,7 +193,7 @@ callback_function_t PeriodCallback1()
   ledON = !ledON;
 }
 
-callback_function_t PeriodCallback2()
+void PeriodCallback2()
 {
   static bool ledON = LED_OFF;
 
@@ -203,22 +204,22 @@ callback_function_t PeriodCallback2()
   ledON = !ledON;
 }
 
-callback_function_t PeriodCallback3()
+void PeriodCallback3()
 {
   callbackTime[3]++;
 }
 
-callback_function_t PeriodCallback4()
+void PeriodCallback4()
 {
   callbackTime[4]++;
 }
 
-callback_function_t PeriodCallback5()
+void PeriodCallback5()
 {
   callbackTime[5]++;
 }
 
-callback_function_t PeriodCallback6()
+void PeriodCallback6()
 {
   callbackTime[6]++;
 }

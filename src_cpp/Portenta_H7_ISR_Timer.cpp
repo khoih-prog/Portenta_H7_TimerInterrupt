@@ -19,12 +19,13 @@
   Based on BlynkTimer.h
   Author: Volodymyr Shymanskyy
 
-  Version: 1.3.0
+  Version: 1.3.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7
   1.3.0   K.Hoang      17/09/2021 Add PWM features and examples
+  1.3.1   K.Hoang      21/09/2021 Fix warnings in PWM examples
 *****************************************************************************************************************************/
 
 #include "Portenta_H7_ISR_Timer.h"

@@ -7,7 +7,7 @@
   Licensed under MIT license
 
   Now even you use all these new 16 ISR-based timers,with their maximum interval practically unlimited (limited only by
-  unsigned long miliseconds), you just consume only one Portenta_H7 STM32 timer and avoid conflicting with other cores' tasks.
+  unsigned long miliseconds), you just consume only one Portenta_H7 STM32 timer and a1void conflicting with other cores' tasks.
   The accuracy is nearly perfect compared to software timers. The most important feature is they're ISR-based timers
   Therefore, their executions are not blocked by bad-behaving functions / tasks.
   This important feature is absolutely necessary for mission-critical tasks.
@@ -19,12 +19,13 @@
   Based on BlynkTimer.h
   Author: Volodymyr Shymanskyy
 
-  Version: 1.3.0
+  Version: 1.3.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7
   1.3.0   K.Hoang      17/09/2021 Add PWM features and examples
+  1.3.1   K.Hoang      21/09/2021 Fix warnings in PWM examples
 *****************************************************************************************************************************/
 
 #pragma once
@@ -37,7 +38,7 @@
 #endif
 
 #ifndef PORTENTA_H7_TIMER_INTERRUPT_VERSION
-  #define PORTENTA_H7_TIMER_INTERRUPT_VERSION       "Portenta_H7_TimerInterrupt v1.3.0"
+  #define PORTENTA_H7_TIMER_INTERRUPT_VERSION       "Portenta_H7_TimerInterrupt v1.3.1"
 #endif
 
 #include "TimerInterrupt_Generic_Debug.h"

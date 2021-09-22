@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.3.1](#Releases-v131)
   * [Releases v1.3.0](#Releases-v130)
   * [Initial Releases v1.2.1](#Initial-Releases-v121)
 
@@ -19,6 +20,10 @@
 ---
 
 ## Changelog
+
+### Releases v1.3.1
+
+1. Fix warnings in PWM examples
 
 ### Releases v1.3.0
 
