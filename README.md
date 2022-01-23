@@ -46,7 +46,7 @@
     * [ 6. TimerInterruptLEDDemo](examples/TimerInterruptLEDDemo)
     * [ 7. TimerInterruptTest](examples/TimerInterruptTest)
     * [ 8. **multiFileProject**](examples/multiFileProject) **New**
-   [2. Multichannel PWM](#2-Multichannel-PWM) 
+  * [2. Multichannel PWM](#2-Multichannel-PWM) 
     * [ 9. PWM_Multi](examples/PWM/PWM_Multi)
     * [10. PWM_Multi_Args](examples/PWM/PWM_Multi_Args)
 * [Example ISR_16_Timers_Array_Complex](#example-isr_16_timers_array_complex)
