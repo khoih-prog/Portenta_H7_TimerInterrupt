@@ -12,20 +12,14 @@
   Therefore, their executions are not blocked by bad-behaving functions / tasks.
   This important feature is absolutely necessary for mission-critical tasks.
 
-  Based on SimpleTimer - A timer library for Arduino.
-  Author: mromani@ottotecnica.com
-  Copyright (c) 2010 OTTOTECNICA Italy
-
-  Based on BlynkTimer.h
-  Author: Volodymyr Shymanskyy
-
-  Version: 1.3.1
+  Version: 1.4.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7
   1.3.0   K.Hoang      17/09/2021 Add PWM features and examples
   1.3.1   K.Hoang      21/09/2021 Fix warnings in PWM examples
+  1.4.0   K.Hoang      22/01/2022 Fix `multiple-definitions` linker error. Fix bug
 *****************************************************************************************************************************/
 
 #pragma once

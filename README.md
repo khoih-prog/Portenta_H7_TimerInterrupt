@@ -11,11 +11,13 @@
 
 ## Table of Contents
 
+* [Important Change from v1.4.0](#Important-Change-from-v140)
 * [Why do we need this Portenta_H7_TimerInterrupt library](#why-do-we-need-this-Portenta_H7_TimerInterrupt-library)
   * [Features](#features)
   * [Why using ISR-based Hardware Timer Interrupt is better](#why-using-isr-based-hardware-timer-interrupt-is-better)
   * [Currently supported Boards](#currently-supported-boards)
   * [Important Notes about ISR](#important-notes-about-isr)
+* [Changelog](changelog.md) 
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
   * [Use Arduino Library Manager](#use-arduino-library-manager)
@@ -43,9 +45,10 @@
     * [ 5. SwitchDebounce](examples/SwitchDebounce)
     * [ 6. TimerInterruptLEDDemo](examples/TimerInterruptLEDDemo)
     * [ 7. TimerInterruptTest](examples/TimerInterruptTest)
+    * [ 8. **multiFileProject**](examples/multiFileProject) **New**
    [2. Multichannel PWM](#2-Multichannel-PWM) 
-    * [ 8. PWM_Multi](examples/PWM/PWM_Multi)
-    * [ 9. PWM_Multi_Args](examples/PWM/PWM_Multi_Args)
+    * [ 9. PWM_Multi](examples/PWM/PWM_Multi)
+    * [10. PWM_Multi_Args](examples/PWM/PWM_Multi_Args)
 * [Example ISR_16_Timers_Array_Complex](#example-isr_16_timers_array_complex)
 * [Debug Terminal Output Samples](#debug-terminal-output-samples)
   * [1. ISR_16_Timers_Array_Complex on PORTENTA_H7_M7](#1-isr_16_timers_array_complex-on-portenta_h7_m7)
@@ -66,6 +69,10 @@
 
 ---
 ---
+
+### Important Change from v1.4.0
+
+Please have a look at [HOWTO Fix `Multiple Definitions` Linker Error](#howto-fix-multiple-definitions-linker-error)
 
 ### Why do we need this [Portenta_H7_TimerInterrupt library](https://github.com/khoih-prog/Portenta_H7_TimerInterrupt)
 
@@ -112,7 +119,7 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 ### Currently supported Boards
 
-1. **Portenta_H7 boards** such as Portenta_H7 Rev2 ABX00042, etc., using [**ArduinoCore-mbed mbed_portenta** core](https://github.com/arduino/ArduinoCore-mbed)
+1. **Portenta_H7 boards** such as Portenta_H7 Rev2 ABX00042, etc., using [**ArduinoCore mbed_portenta** core](https://github.com/arduino/ArduinoCore-mbed)
 
 ---
 
@@ -127,11 +134,12 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 ## Prerequisites
 
- 1. [`Arduino IDE 1.8.16+` for Arduino](https://www.arduino.cc/en/Main/Software)
- 2. [`ArduinoCore-mbed mbed_portenta core 2.4.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino **Portenta_H7** boards, such as **Portenta_H7 Rev2 ABX00042, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-
+ 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
+ 2. [`ArduinoCore-mbed mbed_portenta core 2.6.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino **Portenta_H7** boards, such as **Portenta_H7 Rev2 ABX00042, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
  3. To use with certain example
-   - [`SimpleTimer library`](https://github.com/jfturcot/SimpleTimer) for [ISR_16_Timers_Array example](examples/ISR_16_Timers_Array).
+   - [`SimpleTimer library`](https://github.com/jfturcot/SimpleTimer) for [ISR_16_Timers_Array](examples/ISR_16_Timers_Array) and [ISR_16_Timers_Array_Complex](examples/ISR_16_Timers_Array_Complex) examples.
+   
+   
 ---
 ---
 
@@ -165,12 +173,12 @@ Another way to install is to:
 
 #### 1. For Portenta_H7 boards using Arduino IDE in Linux
 
-  **To be able to upload firmware to Portenta_H7 using Arduino IDE in Linux (Ubuntu, etc.)**, you have to copy the file [portenta_post_install.sh](Packages_Patches/arduino/hardware/mbed_portenta/2.4.1/portenta_post_install.sh) into mbed_portenta directory (~/.arduino15/packages/arduino/hardware/mbed_portenta/2.4.1/portenta_post_install.sh). 
+  **To be able to upload firmware to Portenta_H7 using Arduino IDE in Linux (Ubuntu, etc.)**, you have to copy the file [portenta_post_install.sh](Packages_Patches/arduino/hardware/mbed_portenta/2.6.1/portenta_post_install.sh) into mbed_portenta directory (~/.arduino15/packages/arduino/hardware/mbed_portenta/2.6.1/portenta_post_install.sh). 
   
   Then run the following command using `sudo`
   
 ```
-$ cd ~/.arduino15/packages/arduino/hardware/mbed_portenta/2.4.1
+$ cd ~/.arduino15/packages/arduino/hardware/mbed_portenta/2.6.1
 $ chmod 755 portenta_post_install.sh
 $ sudo ./portenta_post_install.sh
 ```
@@ -183,9 +191,9 @@ This will create the file `/etc/udev/rules.d/49-portenta_h7.rules` as follows:
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="035b", GROUP="plugdev", MODE="0666"
 ```
 
-Supposing the ArduinoCore-mbed core version is 2.4.1. Now only one file must be copied into the directory:
+Supposing the ArduinoCore-mbed core version is 2.6.1. Now only one file must be copied into the directory:
 
-- `~/.arduino15/packages/arduino/hardware/mbed_portenta/2.4.1/portenta_post_install.sh`
+- `~/.arduino15/packages/arduino/hardware/mbed_portenta/2.6.1/portenta_post_install.sh`
 
 Whenever a new version is installed, remember to copy this files into the new version directory. For example, new version is x.yy.zz
 
@@ -198,28 +206,27 @@ This file must be copied into the directory:
 
 ### HOWTO Fix `Multiple Definitions` Linker Error
 
-The current library implementation, using **xyz-Impl.h instead of standard xyz.cpp**, possibly creates certain `Multiple Definitions` Linker error in certain use cases. Although it's simple to just modify several lines of code, either in the library or in the application, the library is adding 2 more source directories
+The current library implementation, using `xyz-Impl.h` instead of standard `xyz.cpp`, possibly creates certain `Multiple Definitions` Linker error in certain use cases.
 
-1. **scr_h** for new h-only files
-2. **src_cpp** for standard h/cpp files
+You can include these `.hpp` or `.h` files
 
-besides the standard **src** directory.
+```
+// Can be included as many times as necessary, without `Multiple Definitions` Linker Error
+#include "Portenta_H7_TimerInterrupt.h"     //https://github.com/khoih-prog/Portenta_H7_TimerInterrupt
 
-To use the **old standard cpp** way, locate this library' directory, then just 
+// Can be included as many times as necessary, without `Multiple Definitions` Linker Error
+#include "Portenta_H7_ISR_Timer.hpp"         //https://github.com/khoih-prog/Portenta_H7_TimerInterrupt
+```
 
-1. **Delete the all the files in src directory.**
-2. **Copy all the files in src_cpp directory into src.**
-3. Close then reopen the application code in Arduino IDE, etc. to recompile from scratch.
+in many files. But be sure to use the following `.h` file **in just 1 `.h`, `.cpp` or `.ino` file**, which must **not be included in any other file**, to avoid `Multiple Definitions` Linker Error
 
-To re-use the **new h-only** way, just 
-
-1. **Delete the all the files in src directory.**
-2. **Copy the files in src_h directory into src.**
-3. Close then reopen the application code in Arduino IDE, etc. to recompile from scratch.
+```
+// To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
+#include "Portenta_H7_ISR_Timer.h"           //https://github.com/khoih-prog/Portenta_H7_TimerInterrupt
+```
 
 ---
 ---
-
 
 ## More useful Information about STM32 Timers
 
@@ -514,11 +521,13 @@ void setup()
  5. [SwitchDebounce](examples/SwitchDebounce)
  6. [TimerInterruptLEDDemo](examples/TimerInterruptLEDDemo)
  7. [TimerInterruptTest](examples/TimerInterruptTest)
+ 8. [**multiFileProject**](examples/multiFileProject). **New**
+
 
 #### 2. Multichannel PWM
  
- 8. [PWM_Multi](examples/PWM/PWM_Multi)
- 9. [PWM_Multi_Args](examples/PWM/PWM_Multi_Args)
+ 9. [PWM_Multi](examples/PWM/PWM_Multi)
+10. [PWM_Multi_Args](examples/PWM/PWM_Multi_Args)
  
 ---
 ---
@@ -535,7 +544,10 @@ void setup()
 // Don't define _TIMERINTERRUPT_LOGLEVEL_ > 0. Only for special ISR debugging only. Can hang the system.
 #define _TIMERINTERRUPT_LOGLEVEL_     4
 
+// Can be included as many times as necessary, without `Multiple Definitions` Linker Error
 #include "Portenta_H7_TimerInterrupt.h"
+
+// To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include "Portenta_H7_ISR_Timer.h"
 
 #include <SimpleTimer.h>              // https://github.com/jfturcot/SimpleTimer
@@ -875,9 +887,9 @@ In this example, 16 independent ISR Timers are used, yet utilized just one Hardw
 
 ```
 Starting ISR_16_Timers_Array_Complex on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.1
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 10000
+Portenta_H7_TimerInterrupt v1.4.0
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =100.00, _count = 10000
 Starting ITimer OK, millis() = 1111
 SimpleTimer : 2, ms : 11111, Dms : 10000
 Timer : 0, programmed : 5000, actual : 5004
@@ -1025,22 +1037,18 @@ The following is the sample terminal output when running example [**TimerInterru
 
 ```
 Starting TimerInterruptTest on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.1
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 1000000
-Starting ITimer0 OK, millis() = 1410
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 3000000
-Starting  ITimer1 OK, millis() = 1411
+Portenta_H7_TimerInterrupt v1.4.0
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =1.00, _count = 1000000
+Starting ITimer0 OK, millis() = 980
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =0.33, _count = 3000000
+Starting  ITimer1 OK, millis() = 980
 Stop ITimer0, millis() = 10001
 Start ITimer0, millis() = 20002
 Stop ITimer1, millis() = 30001
 Stop ITimer0, millis() = 30003
 Start ITimer0, millis() = 40004
-Stop ITimer0, millis() = 50005
-Start ITimer1, millis() = 60002
-Start ITimer0, millis() = 60006
-Stop ITimer0, millis() = 70007
 ```
 
 ---
@@ -1051,16 +1059,16 @@ The following is the sample terminal output when running example [**Argument_Non
 
 ```
 Starting Argument_None on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.1
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 100000000
-[TISR] Frequency = 1000000.00 , _count = 1000000
-Starting ITimer0 OK, millis() = 1009
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 100000000
-[TISR] Frequency = 1000000.00 , _count = 2000000
-Starting  ITimer1 OK, millis() = 1010
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 100000000
-[TISR] Frequency = 1000000.00 , _count = 5000000
-Starting  ITimer2 OK, millis() = 1010
+Portenta_H7_TimerInterrupt v1.4.0
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =1.00, _count = 1000000
+Starting ITimer0 OK, millis() = 1259
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =0.50, _count = 2000000
+Starting  ITimer1 OK, millis() = 1259
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =0.20, _count = 5000000
+Starting  ITimer2 OK, millis() = 1260
 ```
 
 ---
@@ -1071,33 +1079,34 @@ The following is the sample terminal output when running example [Change_Interva
 
 ```
 Starting Change_Interval on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.1
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 500000
-Starting  Timer0 OK, millis() = 1415
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 1000000
-Starting ITimer1 OK, millis() = 1416
+Portenta_H7_TimerInterrupt v1.4.0
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =2.00, _count = 500000
+Starting  Timer0 OK, millis() = 1011
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =1.00, _count = 1000000
+Starting ITimer1 OK, millis() = 1011
 Time = 10001, Timer0Count = 18, Timer1Count = 9
-Time = 20002, Timer0Count = 37, Timer1Count = 19
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 1000000
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 2000000
+Time = 20002, Timer0Count = 38, Timer1Count = 19
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =1.00, _count = 1000000
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =0.50, _count = 2000000
 Changing Interval, Timer0 = 1000,  Timer1 = 2000
-Time = 30003, Timer0Count = 47, Timer1Count = 24
-Time = 40004, Timer0Count = 57, Timer1Count = 29
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 500000
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 1000000
+Time = 30003, Timer0Count = 48, Timer1Count = 24
+Time = 40004, Timer0Count = 58, Timer1Count = 29
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =2.00, _count = 500000
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =1.00, _count = 1000000
 Changing Interval, Timer0 = 500,  Timer1 = 1000
-Time = 50005, Timer0Count = 75, Timer1Count = 37
-Time = 60006, Timer0Count = 95, Timer1Count = 47
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 1000000
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 2000000
+Time = 50005, Timer0Count = 76, Timer1Count = 37
+Time = 60006, Timer0Count = 96, Timer1Count = 47
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =1.00, _count = 1000000
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =0.50, _count = 2000000
+Changing Interval, Timer0 = 1000,  Timer1 = 2000
 ```
 
 ---
@@ -1111,10 +1120,10 @@ While software-based `SimpleTimer`, **programmed for 2s, is activated after 10.0
 
 ```
 Starting ISR_16_Timers_Array on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.1
-[TISR] Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) = 200000000
-[TISR] Frequency = 1000000.00 , _count = 100
-Starting ITimer OK, millis() = 1109
+Portenta_H7_TimerInterrupt v1.4.0
+[TISR] Timer Input Freq (Hz) = 200000000
+[TISR] Frequency =10000.00, _count = 100
+Starting ITimer OK, millis() = 1009
 simpleTimerDoingSomething2s: Delta programmed ms = 2000, actual = 10000
 Timer : 0, programmed : 1000, actual : 1000
 Timer : 1, programmed : 2000, actual : 2000
@@ -1132,23 +1141,6 @@ Timer : 12, programmed : 13000, actual : 0
 Timer : 13, programmed : 14000, actual : 0
 Timer : 14, programmed : 15000, actual : 0
 Timer : 15, programmed : 16000, actual : 0
-simpleTimerDoingSomething2s: Delta programmed ms = 2000, actual = 10000
-Timer : 0, programmed : 1000, actual : 1000
-Timer : 1, programmed : 2000, actual : 2000
-Timer : 2, programmed : 3000, actual : 3000
-Timer : 3, programmed : 4000, actual : 4000
-Timer : 4, programmed : 5000, actual : 5000
-Timer : 5, programmed : 6000, actual : 6000
-Timer : 6, programmed : 7000, actual : 7000
-Timer : 7, programmed : 8000, actual : 8000
-Timer : 8, programmed : 9000, actual : 9000
-Timer : 9, programmed : 10000, actual : 10000
-Timer : 10, programmed : 11000, actual : 11000
-Timer : 11, programmed : 12000, actual : 12000
-Timer : 12, programmed : 13000, actual : 13000
-Timer : 13, programmed : 14000, actual : 14000
-Timer : 14, programmed : 15000, actual : 15000
-Timer : 15, programmed : 16000, actual : 16000
 simpleTimerDoingSomething2s: Delta programmed ms = 2000, actual = 10001
 Timer : 0, programmed : 1000, actual : 1000
 Timer : 1, programmed : 2000, actual : 2000
@@ -1177,7 +1169,7 @@ The following is the sample terminal output when running new example [PWM_Multi_
 
 ```
 Starting PWM_Multi_Args on PORTENTA_H7_M7
-Portenta_H7_TimerInterrupt v1.3.1
+Portenta_H7_TimerInterrupt v1.4.0
 Index = 0, Instance = 0x40010000, channel = 3, TimerIndex = 0
 Index = 1, Instance = 0x40000800, channel = 1, TimerIndex = 3
 Index = 2, Instance = 0x40001400, channel = 2, TimerIndex = 6
@@ -1255,6 +1247,8 @@ Submit issues to: [Portenta_H7_TimerInterrupt issues](https://github.com/khoih-p
 2. More hardware-initiated software-enabled timers
 3. Longer time interval
 4. Add Table of Contents
+5. Fix `multiple-definitions` linker error
+6. Optimize library code by using `reference-passing` instead of `value-passing`
 
 ---
 ---

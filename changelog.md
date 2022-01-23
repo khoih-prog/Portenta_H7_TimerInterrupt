@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.4.0](#Releases-v140)
   * [Releases v1.3.1](#Releases-v131)
   * [Releases v1.3.0](#Releases-v130)
   * [Initial Releases v1.2.1](#Initial-Releases-v121)
@@ -20,6 +21,15 @@
 ---
 
 ## Changelog
+
+### Releases v1.4.0
+
+1. Fix `multiple-definitions` linker error. Drop `src_cpp` and `src_h` directories
+2. Add example [multiFileProject](examples/multiFileProject) to demo for multiple-file project.
+3. Fix `reattachInterrupt()` bug. Check [bugfix: reattachInterrupt() pass wrong frequency value to setFrequency() #19](https://github.com/khoih-prog/ESP8266TimerInterrupt/pull/19)
+4. Optimize library code by using `reference-passing` instead of `value-passing`
+5. Update all examples
+6. Update `Packages_Patches`
 
 ### Releases v1.3.1
 
@@ -35,12 +45,4 @@
 2. Permit up to 16 super-long-time, super-accurate ISR-based timers to avoid being blocked
 3. Using cpp code besides Impl.h code to use if Multiple-Definition linker error.
 4. Bump version to v1.2.1 to sync with [STM32_TimerInterrupt library](https://github.com/khoih-prog/STM32_TimerInterrupt)
-
----
----
-
-## Copyright
-
-Copyright 2021- Khoi Hoang
-
 

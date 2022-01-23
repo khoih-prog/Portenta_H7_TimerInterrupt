@@ -11,21 +11,6 @@
   The accuracy is nearly perfect compared to software timers. The most important feature is they're ISR-based timers
   Therefore, their executions are not blocked by bad-behaving functions / tasks.
   This important feature is absolutely necessary for mission-critical tasks.
-
-  Based on SimpleTimer - A timer library for Arduino.
-  Author: mromani@ottotecnica.com
-  Copyright (c) 2010 OTTOTECNICA Italy
-
-  Based on BlynkTimer.h
-  Author: Volodymyr Shymanskyy
-
-  Version: 1.3.1
-
-  Version Modified By   Date      Comments
-  ------- -----------  ---------- -----------
-  1.2.1   K.Hoang      15/09/2021 Initial coding for Portenta_H7
-  1.3.0   K.Hoang      17/09/2021 Add PWM features and examples
-  1.3.1   K.Hoang      21/09/2021 Fix warnings in PWM examples
 *****************************************************************************************************************************/
 /*
    Notes:
@@ -48,6 +33,7 @@
 // Don't define _TIMERINTERRUPT_LOGLEVEL_ > 0. Only for special ISR debugging only. Can hang the system.
 #define _TIMERINTERRUPT_LOGLEVEL_     4
 
+// Can be included as many times as necessary, without `Multiple Definitions` Linker Error
 #include "Portenta_H7_TimerInterrupt.h"
 
 #define LED_OFF             HIGH
