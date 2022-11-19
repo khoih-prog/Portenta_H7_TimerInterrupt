@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   HardwareTimer.h
-  
+
   For Portenta_H7 boards
   Written by Khoi Hoang
 
@@ -61,7 +61,8 @@
 
 #define  TIMER_CHANNELS 4    // channel5 and channel 6 are not considered here has they don't have gpio output and they don't have interrupt
 
-typedef enum {
+typedef enum
+{
   TIMER_DISABLED,                         // == TIM_OCMODE_TIMING           no output, useful for only-interrupt
   // Output Compare
   TIMER_OUTPUT_COMPARE,                   // == Obsolete, use TIMER_DISABLED instead. Kept for compatibility reason
@@ -86,13 +87,15 @@ typedef enum {
   TIMER_NOT_USED = 0xFFFF  // This must be the last item of this enum
 } TimerModes_t;
 
-typedef enum {
+typedef enum
+{
   TICK_FORMAT, // default
   MICROSEC_FORMAT,
   HERTZ_FORMAT,
 } TimerFormat_t;
 
-typedef enum {
+typedef enum
+{
   RESOLUTION_1B_COMPARE_FORMAT = 1,  // used for Dutycycle: [0 .. 1]
   RESOLUTION_2B_COMPARE_FORMAT,      // used for Dutycycle: [0 .. 3]
   RESOLUTION_3B_COMPARE_FORMAT,      // used for Dutycycle: [0 .. 7]
@@ -122,7 +125,8 @@ typedef enum {
 using callback_function_t = std::function<void(void)>;
 
 /* Class --------------------------------------------------------*/
-class HardwareTimer {
+class HardwareTimer
+{
   public:
     HardwareTimer(TIM_TypeDef *instance);
     ~HardwareTimer();  // destructor
@@ -135,44 +139,59 @@ class HardwareTimer {
     void setPrescaleFactor(uint32_t prescaler); // set prescaler register (which is factor value - 1)
     uint32_t getPrescaleFactor();
 
-    void setOverflow(uint32_t val, TimerFormat_t format = TICK_FORMAT); // set AutoReload register depending on format provided
+    void setOverflow(uint32_t val, TimerFormat_t format =
+                       TICK_FORMAT); // set AutoReload register depending on format provided
     uint32_t getOverflow(TimerFormat_t format = TICK_FORMAT); // return overflow depending on format provided
 
-    void setPWM(uint32_t channel, PinName pin, uint32_t frequency, uint32_t dutycycle, callback_function_t PeriodCallback = nullptr, callback_function_t CompareCallback = nullptr); // Set all in one command freq in HZ, Duty in percentage. Including both interrup.
-    void setPWM(uint32_t channel, uint32_t pin, uint32_t frequency, uint32_t dutycycle, callback_function_t PeriodCallback = nullptr, callback_function_t CompareCallback = nullptr);
+    void setPWM(uint32_t channel, PinName pin, uint32_t frequency, uint32_t dutycycle,
+                callback_function_t PeriodCallback = nullptr,
+                callback_function_t CompareCallback = nullptr); // Set all in one command freq in HZ, Duty in percentage. Including both interrup.
+    void setPWM(uint32_t channel, uint32_t pin, uint32_t frequency, uint32_t dutycycle,
+                callback_function_t PeriodCallback = nullptr, callback_function_t CompareCallback = nullptr);
 
-    void setCount(uint32_t val, TimerFormat_t format = TICK_FORMAT); // set timer counter to value 'val' depending on format provided
-    uint32_t getCount(TimerFormat_t format = TICK_FORMAT);  // return current counter value of timer depending on format provided
+    void setCount(uint32_t val, TimerFormat_t format =
+                    TICK_FORMAT); // set timer counter to value 'val' depending on format provided
+    uint32_t getCount(TimerFormat_t format =
+                        TICK_FORMAT);  // return current counter value of timer depending on format provided
 
-    void setMode(uint32_t channel, TimerModes_t mode, PinName pin = NC); // Configure timer channel with specified mode on specified pin if available
+    void setMode(uint32_t channel, TimerModes_t mode,
+                 PinName pin = NC); // Configure timer channel with specified mode on specified pin if available
     void setMode(uint32_t channel, TimerModes_t mode, uint32_t pin);
 
     TimerModes_t getMode(uint32_t channel);  // Retrieve configured mode
 
     void setPreloadEnable(bool value); // Configure overflow preload enable setting
 
-    uint32_t getCaptureCompare(uint32_t channel, TimerCompareFormat_t format = TICK_COMPARE_FORMAT); // return Capture/Compare register value of specified channel depending on format provided
-    void setCaptureCompare(uint32_t channel, uint32_t compare, TimerCompareFormat_t format = TICK_COMPARE_FORMAT);  // set Compare register value of specified channel depending on format provided
+    uint32_t getCaptureCompare(uint32_t channel,
+                               TimerCompareFormat_t format = TICK_COMPARE_FORMAT); // return Capture/Compare register value of specified channel depending on format provided
+    void setCaptureCompare(uint32_t channel, uint32_t compare,
+                           TimerCompareFormat_t format = TICK_COMPARE_FORMAT);  // set Compare register value of specified channel depending on format provided
 
     void setInterruptPriority(uint32_t preemptPriority, uint32_t subPriority); // set interrupt priority
 
     //Add interrupt to period update
-    void attachInterrupt(callback_function_t callback); // Attach interrupt callback which will be called upon update event (timer rollover)
+    void attachInterrupt(callback_function_t
+                         callback); // Attach interrupt callback which will be called upon update event (timer rollover)
     void detachInterrupt();  // remove interrupt callback which was attached to update event
     bool hasInterrupt();  //returns true if a timer rollover interrupt has already been set
     //Add interrupt to capture/compare channel
-    void attachInterrupt(uint32_t channel, callback_function_t callback); // Attach interrupt callback which will be called upon compare match event of specified channel
-    void detachInterrupt(uint32_t channel);  // remove interrupt callback which was attached to compare match event of specified channel
+    void attachInterrupt(uint32_t channel,
+                         callback_function_t callback); // Attach interrupt callback which will be called upon compare match event of specified channel
+    void detachInterrupt(uint32_t
+                         channel);  // remove interrupt callback which was attached to compare match event of specified channel
     bool hasInterrupt(uint32_t channel);  //returns true if an interrupt has already been set on the channel compare match
     void timerHandleDeinit();  // Timer deinitialization
 
     // Refresh() is usefull while timer is running after some registers update
-    void refresh(void); // Generate update event to force all registers (Autoreload, prescaler, compare) to be taken into account
+    void refresh(
+      void); // Generate update event to force all registers (Autoreload, prescaler, compare) to be taken into account
 
     uint32_t getTimerClkFreq();  // return timer clock frequency in Hz.
 
-    static void captureCompareCallback(TIM_HandleTypeDef *htim); // Generic Caputre and Compare callback which will call user callback
-    static void updateCallback(TIM_HandleTypeDef *htim);  // Generic Update (rollover) callback which will call user callback
+    static void captureCompareCallback(TIM_HandleTypeDef
+                                       *htim); // Generic Caputre and Compare callback which will call user callback
+    static void updateCallback(TIM_HandleTypeDef
+                               *htim);  // Generic Update (rollover) callback which will call user callback
 
     // The following function(s) are available for more advanced timer options
     TIM_HandleTypeDef *getHandle();  // return the handle address for HAL related configuration
@@ -186,7 +205,8 @@ class HardwareTimer {
   private:
     TimerModes_t  _ChannelMode[TIMER_CHANNELS];
     timerObj_t _timerObj;
-    callback_function_t callbacks[1 + TIMER_CHANNELS]; //Callbacks: 0 for update, 1-4 for channels. (channel5/channel6, if any, doesn't have interrupt)
+    callback_function_t callbacks[1 +
+                                    TIMER_CHANNELS]; //Callbacks: 0 for update, 1-4 for channels. (channel5/channel6, if any, doesn't have interrupt)
 };
 
 extern timerObj_t *HardwareTimer_Handle[TIMER_NUM];

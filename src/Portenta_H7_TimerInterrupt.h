@@ -29,7 +29,7 @@
 
 #if ( ( defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) ) && defined(ARDUINO_ARCH_MBED) )
   #warning Use MBED ARDUINO_PORTENTA_H7 and LittleFS
-  
+
   #if defined(BOARD_NAME)
     #undef BOARD_NAME
   #endif
@@ -41,19 +41,19 @@
     #warning Using Portenta H7 M4 core
     #define BOARD_NAME              "PORTENTA_H7_M4"
   #endif
-  
+
 #else
-  #error This code is intended to run on the MBED ARDUINO_PORTENTA_H7 platform! Please check your Tools->Board setting. 
+  #error This code is intended to run on the MBED ARDUINO_PORTENTA_H7 platform! Please check your Tools->Board setting.
 #endif
 
 #ifndef PORTENTA_H7_TIMER_INTERRUPT_VERSION
   #define PORTENTA_H7_TIMER_INTERRUPT_VERSION       "Portenta_H7_TimerInterrupt v1.4.0"
-  
+
   #define PORTENTA_H7_TIMER_INTERRUPT_VERSION_MAJOR      1
   #define PORTENTA_H7_TIMER_INTERRUPT_VERSION_MINOR      4
   #define PORTENTA_H7_TIMER_INTERRUPT_VERSION_PATCH      0
 
-  #define PORTENTA_H7_TIMER_INTERRUPT_VERSION_INT        1004000  
+  #define PORTENTA_H7_TIMER_INTERRUPT_VERSION_INT        1004000
 #endif
 
 
@@ -95,19 +95,19 @@ class Portenta_H7_TimerInterrupt
     Portenta_H7_TimerInterrupt(TIM_TypeDef* timer)
     {
       _timer = timer;
-      
+
       _hwTimer = new HardwareTimer(_timer);
-      
+
       _callback = NULL;
     };
-    
+
     ~Portenta_H7_TimerInterrupt()
     {
       if (_hwTimer)
         delete _hwTimer;
     }
-    
-    #define TIM_CLOCK_FREQ      ( (float) 1000000.0f )
+
+#define TIM_CLOCK_FREQ      ( (float) 1000000.0f )
 
     // frequency (in hertz) and duration (in milliseconds). Duration = 0 or not specified => run indefinitely
     // No params and duration now. To be addes in the future by adding similar functions here or to STM32-hal-timer.c
@@ -116,27 +116,27 @@ class Portenta_H7_TimerInterrupt
       if ( (frequency == 0.0f) || (frequency > 100000.0f) || (callback == NULL) )
       {
         TISR_LOGERROR(F("Error. frequency == 0, higher than 100KHz or callback == NULL "));
-      
+
         return false;
       }
-        
+
       // select timer frequency is 1MHz for better accuracy. We don't use 16-bit prescaler for now.
       // Will use later if very low frequency is needed.
       //_frequency  = 1000000;
       //_timerCount = (uint32_t) _frequency / frequency;
-      
+
       //TISR_LOGWARN1(F("Portenta_H7_TimerInterrupt: Timer Input Freq (Hz) ="), _hwTimer->getTimerClkFreq());
       //TISR_LOGWARN3(F("Frequency ="), _frequency, F(", _count ="), (uint32_t) (_timerCount));
-      
+
       // Hardware timer is preset in RP2040 at 1MHz / 1uS
       _frequency  = frequency;
       _timerCount = (uint32_t) TIM_CLOCK_FREQ / frequency;
-      
+
       TISR_LOGWARN1(F("Timer Input Freq (Hz) = "), _hwTimer->getTimerClkFreq());
       TISR_LOGWARN3(F("Frequency ="), _frequency, F(", _count = "), (uint32_t) (_timerCount));
-      
+
       _hwTimer->setCount(0, MICROSEC_FORMAT);
-      
+
       _hwTimer->setOverflow(_timerCount, MICROSEC_FORMAT);
       //////
 

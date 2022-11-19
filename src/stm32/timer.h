@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   timer.h
-  
+
   For Portenta_H7 boards
   Written by Khoi Hoang
 
@@ -27,16 +27,16 @@
 
 /*
  *******************************************************************************
- * Copyright (c) 2019, STMicroelectronics
- * All rights reserved.
- *
- * This software component is licensed by ST under BSD 3-Clause license,
- * the "License"; You may not use this file except in compliance with the
- * License. You may obtain a copy of the License at:
- *                        opensource.org/licenses/BSD-3-Clause
- *
+   Copyright (c) 2019, STMicroelectronics
+   All rights reserved.
+
+   This software component is licensed by ST under BSD 3-Clause license,
+   the "License"; You may not use this file except in compliance with the
+   License. You may obtain a copy of the License at:
+                          opensource.org/licenses/BSD-3-Clause
+
  *******************************************************************************
- */
+*/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __TIMER_H
@@ -53,44 +53,45 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 #ifndef TIM_IRQ_PRIO
-  #if (__CORTEX_M == 0x00U)
-    #define TIM_IRQ_PRIO       3
-  #else
-    #define TIM_IRQ_PRIO       14
-  #endif /* __CORTEX_M */
+#if (__CORTEX_M == 0x00U)
+#define TIM_IRQ_PRIO       3
+#else
+#define TIM_IRQ_PRIO       14
+#endif /* __CORTEX_M */
 
 #endif /* TIM_IRQ_PRIO */
 
 #ifndef TIM_IRQ_SUBPRIO
-  #define TIM_IRQ_SUBPRIO    0
+#define TIM_IRQ_SUBPRIO    0
 #endif
 
 #if defined(TIM1_BASE) && !defined(TIM1_IRQn)
-  #define TIM1_IRQn TIM1_UP_IRQn
-  #define TIM1_IRQHandler TIM1_UP_IRQHandler
+#define TIM1_IRQn TIM1_UP_IRQn
+#define TIM1_IRQHandler TIM1_UP_IRQHandler
 #endif
 
 #if defined(TIM8_BASE) && !defined(TIM8_IRQn)
-  #define TIM8_IRQn TIM8_UP_TIM13_IRQn
-  #define TIM8_IRQHandler TIM8_UP_TIM13_IRQHandler
+#define TIM8_IRQn TIM8_UP_TIM13_IRQn
+#define TIM8_IRQHandler TIM8_UP_TIM13_IRQHandler
 #endif
 
 #if defined(TIM12_BASE) && !defined(TIM12_IRQn)
-  #define TIM12_IRQn TIM8_BRK_TIM12_IRQn
-  #define TIM12_IRQHandler TIM8_BRK_TIM12_IRQHandler
+#define TIM12_IRQn TIM8_BRK_TIM12_IRQn
+#define TIM12_IRQHandler TIM8_BRK_TIM12_IRQHandler
 #endif
 
 #if defined(TIM13_BASE) && !defined(TIM13_IRQn)
-  #define TIM13_IRQn TIM8_UP_TIM13_IRQn
+#define TIM13_IRQn TIM8_UP_TIM13_IRQn
 #endif
 
 #if defined(TIM14_BASE) && !defined(TIM14_IRQn)
-  #define TIM14_IRQn TIM8_TRG_COM_TIM14_IRQn
-  #define TIM14_IRQHandler TIM8_TRG_COM_TIM14_IRQHandler
+#define TIM14_IRQn TIM8_TRG_COM_TIM14_IRQn
+#define TIM14_IRQHandler TIM8_TRG_COM_TIM14_IRQHandler
 #endif
 
 
-typedef enum {
+typedef enum
+{
 #if defined(TIM1_BASE)
   TIMER1_INDEX,
 #endif
@@ -165,7 +166,8 @@ typedef enum {
 
 // This structure is used to be able to get HardwareTimer instance (C++ class)
 // from handler (C structure) specially for interrupt management
-typedef struct  {
+typedef struct
+{
   // Those 2 first fields must remain in this order at the beginning of the structure
   void    *__this;
   TIM_HandleTypeDef handle;
